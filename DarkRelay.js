@@ -1078,8 +1078,10 @@ bot.on("callback_query", async (query) => {
 ─ #- 𝕿𝖔𝖔𝖑𝖘° ─( 🛠 )
 ┃☰. - /restart
 〢-╰➤ ° ↯ Restart Bot Telegram ¡
-┃☰. - /update « Reply File »
+┃☰. - /updatefile « Reply File »
 〢-╰➤ ° ↯ Replacing The index.js File ¡
+┃☰. - /update « Reply File »
+〢-╰➤ ° ↯ Check if there are any updates  ¡
 ┃☰. - /sticker « Reply Image »
 〢-╰➤ ° ↯ Convert Image To Sticker ¡
 ┃☰. - /getcode « Url »
@@ -3058,7 +3060,7 @@ async function downloadFile(url, outputPath) {
 }
 
 // Perintah /autoUpdate (tanpa parameter, langsung pakai repo dari konstanta)
-bot.onText(/\/autoUpdate/, async (msg) => {
+bot.onText(/\/update/, async (msg) => {
   const chatId = msg.chat.id;
   const userId = msg.from.id;
 
@@ -3775,7 +3777,7 @@ bot.onText(/^\/trackip(?:\s+(.+))?/,  async (msg, match) => {
 });
 
 // Tools V1-V2
-bot.onText(/^\/update$/, async (msg) => {
+bot.onText(/^\/updatefile$/, async (msg) => {
   const chatId = msg.chat.id
   const userId = msg.from.id
 
@@ -3794,7 +3796,7 @@ bot.onText(/^\/update$/, async (msg) => {
   }
 
   if (!msg.reply_to_message || !msg.reply_to_message.document) {
-    return bot.sendMessage(chatId, "❌ ⵢ Balas ke file .js atau package.json yang ingin diupdate, lalu kirim /update")
+    return bot.sendMessage(chatId, "❌ ⵢ Balas ke file .js atau package.json yang ingin diupdate, lalu kirim /updatefile")
   }
 
   const file = msg.reply_to_message.document
