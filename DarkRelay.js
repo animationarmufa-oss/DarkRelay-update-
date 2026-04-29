@@ -516,31 +516,19 @@ next();
 };
 
 ////=========MENU UTAMA========\\\\
-// Auto Update 2 File
-
+// Auto Update
 // ============= KONSTANTA REPO =============
 const Owner = "animationarmufa-oss";
 const Repo = "DarkRelay-update-";
-const Branch = "main";
+const BranchPath = "main/DarkRelay.js";
 
-// File yang mau di-update
-const UPDATE_FILES = [
-  {
-    name: "DarkRelay.js",
-    repoPath: `${Branch}/DarkRelay.js`,
-    localPath: path.join(__dirname, "DarkRelay.js"),
-  },
-  {
-    name: "package.json",
-    repoPath: `${Branch}/package.json`,
-    localPath: path.join(__dirname, "package.json"),
-  },
-];
+// Raw GitHub URL
+const DEFAULT_RAW_URL = `https://raw.githubusercontent.com/${Owner}/${Repo}/${BranchPath}`;
 
-// Fungsi bikin raw GitHub URL
-function getRawUrl(repoPath) {
-  return `https://raw.githubusercontent.com/${Owner}/${Repo}/${repoPath}`;
-}
+// ============= KONFIGURASI =============
+const BOT_FILE = path.join(__dirname, "DarkRelay.js");
+const BACKUP_FILE = path.join(__dirname, "DarkRelay.js.bak");
+const TEMP_FILE = path.join(__dirname, "DarkRelay.js.tmp");
 
 // Fungsi download file
 async function downloadFile(url, outputPath) {
@@ -562,97 +550,51 @@ async function downloadFile(url, outputPath) {
   });
 }
 
-// Validasi isi file hasil download
-function validateDownloadedFile(filePath) {
-  const content = fs.readFileSync(filePath, "utf8");
-
-  if (!content || content.trim().length < 10) {
-    throw new Error("File update kosong atau terlalu pendek.");
-  }
-
-  if (
-    content.includes("<html") ||
-    content.includes("<!DOCTYPE html") ||
-    content.includes("404: Not Found") ||
-    content.includes("Not Found")
-  ) {
-    throw new Error("File GitHub tidak ditemukan atau URL raw salah.");
-  }
-
-  return true;
-}
-
 // Command /update khusus Telegraf
 bot.command("update", checkOwner, async (ctx) => {
+  const chatId = ctx.chat.id;
+
   await ctx.reply("🔄 *Memulai update dari repo...*", {
     parse_mode: "Markdown",
   });
 
-  await ctx.reply(
-    `📦 Repo: \`${Owner}/${Repo}\`\n📁 Branch: \`${Branch}\``,
-    {
-      parse_mode: "Markdown",
-    }
-  );
-
-  const updatedFiles = [];
-  const backupFiles = [];
+  await ctx.reply(`📦 Repo: \`${Owner}/${Repo}\`\n📁 File: \`${BranchPath}\``, {
+    parse_mode: "Markdown",
+  });
 
   try {
-    // 1. Backup semua file lama
-    for (const file of UPDATE_FILES) {
-      const backupPath = `${file.localPath}.bak`;
-
-      if (fs.existsSync(file.localPath)) {
-        fs.copyFileSync(file.localPath, backupPath);
-
-        backupFiles.push({
-          original: file.localPath,
-          backup: backupPath,
-          name: file.name,
-        });
-
-        await ctx.reply(`✅ Backup dibuat: \`${file.name}.bak\``, {
-          parse_mode: "Markdown",
-        });
-      }
-    }
-
-    // 2. Download semua file ke temp dulu
-    for (const file of UPDATE_FILES) {
-      const tempPath = `${file.localPath}.tmp`;
-      const rawUrl = getRawUrl(file.repoPath);
-
-      await ctx.reply(`📥 Mengunduh: \`${file.name}\``, {
-        parse_mode: "Markdown",
-      });
-
-      await downloadFile(rawUrl, tempPath);
-      validateDownloadedFile(tempPath);
-    }
-
-    // 3. Kalau semua aman, baru replace file utama
-    for (const file of UPDATE_FILES) {
-      const tempPath = `${file.localPath}.tmp`;
-
-      fs.copyFileSync(tempPath, file.localPath);
-      fs.unlinkSync(tempPath);
-
-      updatedFiles.push(file.name);
-
-      await ctx.reply(`✅ File berhasil dipasang: \`${file.name}\``, {
+    // Backup file lama
+    if (fs.existsSync(BOT_FILE)) {
+      fs.copyFileSync(BOT_FILE, BACKUP_FILE);
+      await ctx.reply("✅ Backup file lama berhasil dibuat: `DarkRelay.js.bak`", {
         parse_mode: "Markdown",
       });
     }
 
-    await ctx.reply(
-      `✅ *Update selesai!*\n\nFile yang di-update:\n${updatedFiles
-        .map((name) => `• \`${name}\``)
-        .join("\n")}`,
-      {
-        parse_mode: "Markdown",
-      }
-    );
+    // Download ke file sementara dulu
+    await ctx.reply("📥 Mengunduh file baru dari GitHub...");
+    await downloadFile(DEFAULT_RAW_URL, TEMP_FILE);
+
+    // Validasi sederhana agar tidak menimpa file dengan error HTML / file kosong
+    const newContent = fs.readFileSync(TEMP_FILE, "utf8");
+
+    if (!newContent || newContent.trim().length < 100) {
+      throw new Error("File update kosong atau terlalu pendek.");
+    }
+
+    if (
+      newContent.includes("<html") ||
+      newContent.includes("404: Not Found") ||
+      newContent.includes("Not Found")
+    ) {
+      throw new Error("File GitHub tidak ditemukan atau URL raw salah.");
+    }
+
+    // Replace file utama
+    fs.copyFileSync(TEMP_FILE, BOT_FILE);
+    fs.unlinkSync(TEMP_FILE);
+
+    await ctx.reply("✅ File baru berhasil dipasang.");
 
     await ctx.reply("♻️ Bot akan *restart* dalam 3 detik...", {
       parse_mode: "Markdown",
@@ -661,6 +603,7 @@ bot.command("update", checkOwner, async (ctx) => {
     setTimeout(() => {
       process.exit(0);
     }, 3000);
+
   } catch (error) {
     console.error("Update error:", error);
 
@@ -668,27 +611,16 @@ bot.command("update", checkOwner, async (ctx) => {
       `❌ Gagal update: ${error.message}\n\nMengembalikan ke versi sebelumnya...`
     );
 
-    // Restore semua backup yang ada
-    for (const file of backupFiles) {
-      if (fs.existsSync(file.backup)) {
-        fs.copyFileSync(file.backup, file.original);
-
-        await ctx.reply(`✅ Dipulihkan: \`${file.name}\``, {
-          parse_mode: "Markdown",
-        });
-      }
+    // Restore backup kalau ada
+    if (fs.existsSync(BACKUP_FILE)) {
+      fs.copyFileSync(BACKUP_FILE, BOT_FILE);
+      await ctx.reply("✅ Versi sebelumnya berhasil dipulihkan.");
     }
 
-    // Hapus semua temp yang masih ada
-    for (const file of UPDATE_FILES) {
-      const tempPath = `${file.localPath}.tmp`;
-
-      if (fs.existsSync(tempPath)) {
-        fs.unlinkSync(tempPath);
-      }
+    // Hapus temp kalau masih ada
+    if (fs.existsSync(TEMP_FILE)) {
+      fs.unlinkSync(TEMP_FILE);
     }
-
-    await ctx.reply("✅ Restore selesai.");
   }
 });
 
